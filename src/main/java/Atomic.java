@@ -3,7 +3,7 @@ import java.util.*;
 public class Atomic {
     private int atomicID;
 
-    public PrimitiveElement(int atomicId) {
+    public void PrimitiveElement(int atomicId) {
 		atomicID = atomicId;
 	}
 
