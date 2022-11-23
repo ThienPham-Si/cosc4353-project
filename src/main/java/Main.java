@@ -8,7 +8,7 @@ public class Main {
 
         ///////////////////// Expression
         // basic calculation
-        Expression ex1 = new Expression("2 + 3");
+        Expression ex1 = new Expression("2^(3+3)+2");
         System.out.println(ex1.getExpressionString() + " = " + ex1.eval());
 
         // power
@@ -31,6 +31,19 @@ public class Main {
         Matrix matrix2 = new Matrix(new double[][]{{1,2,3}, {4,5,6}, {7,8,9}});
         System.out.print(matrix1.multiplyMatrix(matrix2));
 
+        // Add
+        Matrix matrix3 = new Matrix(new double[][]{{1,2,3}, {4,5,6}, {7,8,9}});
+        System.out.print(matrix1.addMatrix(matrix3));
+
+        // Transpose
+        System.out.print(matrix1.tranpose());
+
+        // Shape
+        System.out.println(matrix1.shape());
+
+        // Mult
+        matrix1.mult(2);
+        matrix1.printMatrix();
     }
 
 }

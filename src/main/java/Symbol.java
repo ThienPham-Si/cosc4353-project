@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Symbol {
+public class Symbol implements AST{
     private String symbolName;
     private String symbolValueExpression;
     private double symbolValue;
@@ -16,7 +16,14 @@ public class Symbol {
         this.symbolValueExpression = symbolValueExpression;
     }
 
+    public Symbol(String name) {
+        this.symbolName = name;
+    }
 
+    @Override
+    public AST expand() {
+        return this;
+    }
 
     @Override
     public String toString() {
