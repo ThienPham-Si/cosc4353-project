@@ -25,7 +25,7 @@ public class Expression {
             boolean result = (basicOps.eval(this.expressionString.substring(0, index)) == basicOps.eval(this.expressionString.substring(index+1)));
             return (T) (result?"true":"false");
         }
-        return (T) new Double(basicOps.eval(expressionString));
+        return (T) new double[(int) basicOps.eval(expressionString)];
     }
 
     // public <T> T func(Object obj){
