@@ -64,7 +64,7 @@ public class Pow extends BinaryExpression implements Expression {
             Expression tempRepresentation = new Pow(new Var("e"), tempExponent);
             return new Mult(tempRepresentation, tempExponent.differentiate(var));
         }
-        return new Mult(new Mult(this.getE2(), new Pow(this.getE1(), new Minus(this.getE2(), new Num(1)))), e1Diff);
+        return new Mult(new Mult(this.getE2(), new Pow(this.getE1(), new Minus(this.getE2(), new Symbol.Num(1)))), e1Diff);
     }
 
     public Expression simplify() {
@@ -72,11 +72,11 @@ public class Pow extends BinaryExpression implements Expression {
             return super.simplify();
         } else {
             if (this.getE2().simplify().toString().equals("0.0") || this.getE1().simplify().toString().equals("1.0")) {
-                return new Num(1);
+                return new Symbol.Num(1);
             } else if (this.getE2().simplify().toString().equals("1.0")) {
                 return this.getE1().simplify();
             } else if (this.getE1().simplify().toString().equals("0.0")) {
-                return new Num(0);
+                return new Symbol.Num(0);
             }
             return new Pow(this.getE1().simplify(), this.getE2().simplify());
         }

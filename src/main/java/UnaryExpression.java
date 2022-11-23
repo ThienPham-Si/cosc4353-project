@@ -24,7 +24,7 @@ public abstract class UnaryExpression extends BaseExpression {
      * @param num number
      */
     public UnaryExpression(double num) {
-        this(new Num(num));
+        this(new Symbol.Num(num));
     }
 
     /**
@@ -65,7 +65,7 @@ public abstract class UnaryExpression extends BaseExpression {
 
     public Expression simplify() {
         try {
-            return new Num(this.evaluate());
+            return new Symbol.Num(this.evaluate());
         } catch (Exception ex) {
             return null;
         }

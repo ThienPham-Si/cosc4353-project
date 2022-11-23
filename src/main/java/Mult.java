@@ -60,7 +60,7 @@ public class Mult extends BinaryExpression implements Expression {
         else {
 // 0 * x = 0 or x * 0 = 0
             if (this.getE1().simplify().toString().equals("0.0") || this.getE2().simplify().toString().equals("0.0")) {
-                return new Num(0);
+                return new Symbol.Num(0);
             } else if (this.getE1().simplify().toString().equals("1.0")) { // 1 * x = x
                 return this.getE2().simplify();
             } else if (this.getE2().simplify().toString().equals("1.0")) { // x * 1 = x
@@ -72,16 +72,16 @@ public class Mult extends BinaryExpression implements Expression {
 
     public Expression advancedSimplify() {
         if (this.getE1().toString().equals(this.getE2().toString())) { // x * x = x^2
-            return new Pow(this.getE1(), new Num(2)).simplify().advancedSimplify();
+            return new Pow(this.getE1(), new Symbol.Num(2)).simplify().advancedSimplify();
         }
         else if ((this.getE2() instanceof Pow) && (this.getE1().toString().equals(((Pow) this.getE2()).getE1().
                 toString()))) { // x * (x^2) = x^3
-            return new Pow(this.getE1(), new Plus(((Pow) this.getE2()).getE2(), new Num(1))).simplify().
+            return new Pow(this.getE1(), new Plus(((Pow) this.getE2()).getE2(), new Symbol.Num(1))).simplify().
                     advancedSimplify();
         }
         else if ((this.getE1() instanceof Pow) && (this.getE2().toString().equals(((Pow) this.getE1()).getE1().
                 toString()))) { // (x^2) * x = x^3
-            return new Pow(this.getE2(), new Plus(((Pow) this.getE1()).getE2(), new Num(1))).simplify().
+            return new Pow(this.getE2(), new Plus(((Pow) this.getE1()).getE2(), new Symbol.Num(1))).simplify().
                     advancedSimplify();
         }
         return this.simplify();

@@ -286,7 +286,7 @@ public class Minus extends BinaryExpression implements Expression {
 
             } else if (this.getE1().simplify().toString().equals(this.getE2().simplify().toString())) { // X - X = 0
 
-                return new Num(0);
+                return new Symbol.Num(0);
 
             }
 
@@ -316,7 +316,7 @@ public class Minus extends BinaryExpression implements Expression {
 
                 equals(new Plus(((Plus) this.getE2()).getE2(), ((Plus) this.getE2()).getE1()).toString()))) {
 
-            return new Num(0);
+            return new Symbol.Num(0);
 
 // (y + x) - (x + y) = 0
 
@@ -324,7 +324,7 @@ public class Minus extends BinaryExpression implements Expression {
 
                 equals(new Plus(((Plus) this.getE1()).getE2(), ((Plus) this.getE1()).getE1()).toString()))) {
 
-            return new Num(0);
+            return new Symbol.Num(0);
 
 // (x * y) - (y * x) = 0
 
@@ -332,7 +332,7 @@ public class Minus extends BinaryExpression implements Expression {
 
                 equals(new Mult(((Mult) this.getE2()).getE2(), ((Mult) this.getE2()).getE1()).toString()))) {
 
-            return new Num(0);
+            return new Symbol.Num(0);
 
 // (y * x) - (x * y) = 0
 
@@ -340,7 +340,7 @@ public class Minus extends BinaryExpression implements Expression {
 
                 equals(new Mult(((Mult) this.getE1()).getE2(), ((Mult) this.getE1()).getE1()).toString()))) {
 
-            return new Num(0);
+            return new Symbol.Num(0);
 
         }
 
