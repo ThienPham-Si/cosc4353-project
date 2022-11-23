@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class Symbol implements AST{
+public class Symbol implements AST {
     private String symbolName;
     private String symbolValueExpression;
     private double symbolValue;
@@ -23,7 +23,7 @@ public class Symbol implements AST{
 
     @Override
     public AST expand() {
-        return this;
+        return this.expand();
     }
 
     @Override
@@ -39,7 +39,7 @@ public class Symbol implements AST{
             this.num = num;
         }
 
-        public double evaluate(Map<String, Double> assignment) throws Exception {
+        public double evaluate(Map<String, Double> assignment) {
             return this.num;
         }
 

@@ -101,9 +101,8 @@ public class Plus extends BinaryExpression implements Expression {
      *
      * @param assignment variable values
      * @return result
-     * @throws Exception If the expression contains a variable which is not in the assignment, an exception is thrown.
      */
-    public double evaluate(Map<String, Double> assignment) throws Exception {
+    public double evaluate(Map<String, Double> assignment) {
         return this.getE1().evaluate(assignment) + this.getE2().evaluate(assignment);
     }
 
@@ -205,9 +204,11 @@ public class Plus extends BinaryExpression implements Expression {
                     return null;
                 }
             }
-        } else if (this.getE1().toString().equals(this.getE2().toString())) { // x + x = 2 * x
+        }
+        else if (this.getE1().toString().equals(this.getE2().toString())) { // x + x = 2 * x
             return new Mult(new Symbol.Num(2), this.getE1()).simplify().advancedSimplify();
-        } else if ((this.getE1() instanceof Mult) && (this.getE2() instanceof Mult) && ((Mult) this.getE1()).getE2().
+        }
+        else if ((this.getE1() instanceof Mult) && (this.getE2() instanceof Mult) && ((Mult) this.getE1()).getE2().
                 toString().equals(((Mult) this.getE2()).getE2().toString())) { // 2x + 3x = 5x
             return new Mult(new Plus(((Mult) this.getE1()).getE1(), ((Mult) this.getE2()).getE1()), ((Mult)
                     this.getE1()).getE2()).simplify().advancedSimplify();

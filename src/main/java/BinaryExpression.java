@@ -16,9 +16,9 @@ public abstract class BinaryExpression extends BaseExpression {
 
 // members
 
-    private Expression e1;
+    public Expression e1;
 
-    private Expression e2;
+    public Expression e2;
 
     /**
 

@@ -35,7 +35,7 @@ public class Mult extends BinaryExpression implements Expression {
         super(num1, num2);
     }
 
-    public double evaluate(Map<String, Double> assignment) throws Exception {
+    public double evaluate(Map<String, Double> assignment) {
         return this.getE1().evaluate(assignment) * this.getE2().evaluate(assignment);
     }
 

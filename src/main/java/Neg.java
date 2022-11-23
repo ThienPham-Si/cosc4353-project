@@ -12,7 +12,7 @@ public class Neg extends UnaryExpression implements Expression {
         super(var);
     }
 
-    public double evaluate(Map<String, Double> assignment) throws Exception {
+    public double evaluate(Map<String, Double> assignment) {
         return -1 * (this.getE().evaluate(assignment));
     }
 

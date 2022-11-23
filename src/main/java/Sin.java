@@ -14,7 +14,7 @@ public class Sin extends UnaryExpression implements Expression {
         super(var);
     }
 
-    public double evaluate(Map<String, Double> assignment) throws Exception {
+    public double evaluate(Map<String, Double> assignment) {
         return Math.sin(Math.toRadians(this.getE().evaluate(assignment)));
     }
 

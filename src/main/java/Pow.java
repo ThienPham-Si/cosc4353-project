@@ -38,7 +38,7 @@ public class Pow extends BinaryExpression implements Expression {
     }
 
 
-    public double evaluate(Map<String, Double> assignment) throws Exception {
+    public double evaluate(Map<String, Double> assignment) {
         return Math.pow(this.getE1().evaluate(assignment), this.getE2().evaluate(assignment));
     }
 
@@ -53,12 +53,12 @@ public class Pow extends BinaryExpression implements Expression {
         return new Pow(e1Ass, e2Ass);
     }
 
-    private Pow getE1() {
+    public Pow getE1() {
         return null;
     }
 
     public Expression differentiateCalculator(Expression e1Diff, Expression e2Diff, String var) {
-        List e2Variables = this.getE2().getVariables();
+        List e2Variables = (List) this.getE2().getVariables();
         if ((e2Variables != null) && (e2Variables.contains(var))) {
             Expression tempExponent = new Mult(this.getE2(), new Log(new Var("e"), this.getE1()));
             Expression tempRepresentation = new Pow(new Var("e"), tempExponent);

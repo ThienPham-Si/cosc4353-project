@@ -1,24 +1,6 @@
 import java.util.Map;
 
-/**
-
- * Div class.
-
- */
-
 public class Div extends BinaryExpression implements Expression {
-
-    /**
-
-     * constructor.
-
-     *
-
-     * @param e1 left
-
-     * @param e2 right
-
-     */
 
     public Div(Expression e1, Expression e2) {
 
@@ -26,35 +8,11 @@ public class Div extends BinaryExpression implements Expression {
 
     }
 
-    /**
-
-     * constructor for expression in left and variable in right.
-
-     *
-
-     * @param e1 left
-
-     * @param var right
-
-     */
-
     public Div(Expression e1, String var) {
 
         super(e1, var);
-
     }
 
-    /**
-
-     * constructor for expression in left and number in right.
-
-     *
-
-     * @param e1 left
-
-     * @param num right
-
-     */
 
     public Div(Expression e1, double num) {
 

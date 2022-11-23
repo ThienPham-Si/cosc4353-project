@@ -100,9 +100,8 @@ public class Log extends BinaryExpression implements Expression {
      *
      * @param assignment variable values
      * @return result
-     * @throws Exception If the expression contains a variable which is not in the assignment, an exception is thrown.
      */
-    public double evaluate(Map<String, Double> assignment) throws Exception {
+    public double evaluate(Map<String, Double> assignment) {
         return Math.log(this.getE2().evaluate(assignment)) / Math.log(this.getE1().evaluate(assignment));
     }
 

@@ -44,21 +44,14 @@ public class Expression {
     protected Expression assign(String var, Expression expression) {
         return expression;
     }
+
+    protected Expression simplify() {
+        return null;
+    }
+
+    protected Expression advancedSimplify() {
+        return null;
+
+    }
 }
-    //public Expression differentiate(String var) {
 
-
-    // public <T> T func(Object obj){
-    //     if(obj instanceof Class1)
-    //     {
-    //         return  (T) new Integer(1);
-    //     }
-    //     else if(obj instanceof Class2)
-    //     {
-    //         return  (T) "asdf";
-    //     }
-    //     else
-    //     {
-    //         return  (T) new Double(1.7);
-    //     }
-    // }
