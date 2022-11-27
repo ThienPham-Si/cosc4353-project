@@ -1,36 +1,85 @@
 import java.util.*;
 
 public class Main {
+    public static double[][] readMatrixByUser()
+    {
+        int m, n, i, j;
+        Scanner in = null;
+        in = new Scanner(System.in);
+        System.out.println("Enter the number "
+                + "of rows and cols of the matrix (m*n)");
+        m = in.nextInt();
+        n = in.nextInt();
+
+        // Declare the matrix
+        double first[][] = new double[m][n];
+
+        // Read the matrix values
+        System.out.println("Enter the elements of the matrix");
+        for (i = 0; i < m; i++)
+            for (j = 0; j < n; j++)
+                first[i][j] = in.nextDouble();
+
+        return first;
+
+    }
     public static void main(String[] args){
+        Scanner sc = new Scanner(System.in).useDelimiter("\n");
+        Random rnd = new Random();
+        int choice;
+        double average;
 
-        ///////////////////// Symbol
-        Symbol x = new Symbol("x", 4);
+        do {
+            System.out.println(
+                    "" +
+                            "\tMath Operations in Java\n"
+            );
 
-        ///////////////////// Expression
-        // basic calculation
-        Expression ex1 = new Expression("2 + 3");
-        System.out.println(ex1.getExpressionString() + " = " + ex1.eval());
+            System.out.println(
+                    "Choose the type of problem:\n" +
+                            "1. Basic Operations\n" +
+                            "2. Solve\n" +
+                            "3. Matrix\n" +
+                            "4. Quit"
+            );
+            System.out.print("Enter your choice: \n");
+            choice = sc.nextInt();
+            if( choice != 4) {
+                if (choice == 1) {
+                    System.out.print("Enter your expression \n");
+                    Expression ex1 = new Expression(sc.next());
+                    System.out.println(ex1.getExpressionString() + " = " + ex1.eval());
+                }
+                if (choice == 3) {
+                    System.out.print("How many Matrices?\n");
+                    int nMatrices = sc.nextInt();
+                    Matrix arrayMatrices[] = new Matrix[nMatrices];
 
-        // power
-        ex1.setExpressionString("2^3 + 2");
-        System.out.println(ex1.getExpressionString() + " = " + ex1.eval());
+                    for (int i = 1; i <= nMatrices; i++) {
+                        System.out.print("Matrix " + i + "\n");
+                        Matrix matrix = new Matrix(readMatrixByUser());
+                        arrayMatrices[i] = matrix;
+                    }
 
-        // sin, cos
-        ex1.setExpressionString("sin(45) + cos(45)");
-        System.out.println(ex1.getExpressionString() + " = " + ex1.eval());
 
-        // relation
-        ex1.setExpressionString("3+3 = 7");
-        System.out.println(ex1.getExpressionString() + " is " + ex1.eval());
+                    System.out.print("What operation do you want?\n");
+                    String operation = sc.next();
+                    switch (operation) {
+                        case "*":
+                            System.out.print(arrayMatrices[0].multiplyMatrix(arrayMatrices[1]));
+                            break;
+                        case "t":
+                            System.out.print(arrayMatrices[0].tranpose());
+                            break;
+                        default:
+                    }
+                }
 
-        ///////////////////// Matrix
-        // Print matrix
-        Matrix matrix1 = new Matrix(new double[][]{{1,2,3}, {4,5,6}, {7,8,9}});
-
-        // Multiply
-        Matrix matrix2 = new Matrix(new double[][]{{1,2,3}, {4,5,6}, {7,8,9}});
-        System.out.print(matrix1.multiplyMatrix(matrix2));
+                String restart = sc.next();
+            }
+        }while(choice != 4);
 
     }
 
 }
+
