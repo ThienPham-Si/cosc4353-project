@@ -25,9 +25,7 @@ public class Main {
     }
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in).useDelimiter("\n");
-        Random rnd = new Random();
         int choice;
-        double average;
 
         do {
             System.out.println(
@@ -53,26 +51,43 @@ public class Main {
                 if (choice == 3) {
                     System.out.print("How many Matrices?\n");
                     int nMatrices = sc.nextInt();
-                    Matrix arrayMatrices[] = new Matrix[nMatrices];
+                    Matrix[] arrayMatrices = new Matrix[nMatrices];
 
                     for (int i = 1; i <= nMatrices; i++) {
                         System.out.print("Matrix " + i + "\n");
                         Matrix matrix = new Matrix(readMatrixByUser());
-                        arrayMatrices[i] = matrix;
+                        arrayMatrices[i-1] = matrix;
                     }
 
+
+                    while (true){
+                    int pickedMatrix;
+                    if (nMatrices == 1){
+                        pickedMatrix = 0;
+                    } else {
+                        System.out.print("Which matrices you want to pick?\n");
+                        if (sc.hasNextInt()) {
+                            pickedMatrix = sc.nextInt() - 1;
+                        } else {
+                            break;
+                        }
+                    }
 
                     System.out.print("What operation do you want?\n");
                     String operation = sc.next();
                     switch (operation) {
                         case "*":
-                            System.out.print(arrayMatrices[0].multiplyMatrix(arrayMatrices[1]));
+                            System.out.print("Pick the 2nd matrix\n");
+                            int secondMatrix = sc.nextInt() - 1;
+                            System.out.print(arrayMatrices[pickedMatrix].multiplyMatrix(arrayMatrices[secondMatrix]));
                             break;
                         case "t":
-                            System.out.print(arrayMatrices[0].tranpose());
+                            System.out.print(arrayMatrices[pickedMatrix].tranpose());
                             break;
+                        case "p":
+                            arrayMatrices[pickedMatrix].printMatrix();
                         default:
-                    }
+                    }}
                 }
 
                 String restart = sc.next();
