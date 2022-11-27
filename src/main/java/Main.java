@@ -1,3 +1,7 @@
+import org.matheclipse.core.eval.ExprEvaluator;
+import org.matheclipse.core.interfaces.IExpr;
+import org.matheclipse.parser.client.SyntaxError;
+import org.matheclipse.parser.client.math.MathException;
 import simplification.*;
 
 import java.util.*;
@@ -19,12 +23,12 @@ public class Main {
                             "1. Basic Operations\n" +
                             "2. Simplify\n" +
                             "3. Matrix\n" +
-                            "4. Set\n" +
+                            "4. Expand\n" +
                             "5. Quit"
             );
             System.out.print("Enter your choice: \n");
             choice = sc.nextInt();
-            if( choice != 4) {
+            if( choice != 5) {
                 if (choice == 1) {
                     System.out.print("Enter your expression \n");
                     while (true){
@@ -39,6 +43,9 @@ public class Main {
                 }
                 if (choice==2){
                     simplify(sc);
+                }
+                if (choice==4) {
+                    expand(sc);
                 }
                 if (choice == 3) {
                     System.out.print("How many Matrices?\n");
@@ -129,7 +136,7 @@ public class Main {
         String[] operators = exp.split("(?<=[-+*/])|(?=[-+*/])");
         Expression[] binaryExpressions = new Expression[operators.length];
         for (int i = 0; i < operators.length; i++) {
-            if(i%2==0){
+            if (i % 2 == 0) {
                 String[] part = operators[i].split("(?<=\\d)(?=\\D)");
                 int coeff = Integer.parseInt(part[0]);
                 String var = part[1];
@@ -137,19 +144,37 @@ public class Main {
             }
         }
 
-        for (int i = 1; i < operators.length; i+=2) {
+        for (int i = 1; i < operators.length; i += 2) {
             switch ((operators[i])) {
-                case "+" ->
-                        System.out.println(new Plus(binaryExpressions[0], binaryExpressions[2]).advancedSimplify());
+                case "+" -> System.out.println(new Plus(binaryExpressions[0], binaryExpressions[2]).advancedSimplify());
                 case "-" ->
                         System.out.println(new Minus(binaryExpressions[0], binaryExpressions[2]).advancedSimplify());
-                case "*" ->
-                        System.out.println(new Mult(binaryExpressions[0], binaryExpressions[2]).advancedSimplify());
-                case "/" ->
-                        System.out.println(new Div(binaryExpressions[0], binaryExpressions[2]).advancedSimplify());
+                case "*" -> System.out.println(new Mult(binaryExpressions[0], binaryExpressions[2]).advancedSimplify());
+                case "/" -> System.out.println(new Div(binaryExpressions[0], binaryExpressions[2]).advancedSimplify());
                 default -> {
                 }
             }
         }
-}}
+    }
+
+    public static void expand(Scanner sc) {
+        System.out.println("Enter the expression");
+        String exp = sc.next();
+
+            try {
+                ExprEvaluator util = new ExprEvaluator();
+
+                //try -2(3u-x)-v
+                IExpr result = util.eval("ExpandAll("+exp+")");
+                System.out.println(result.toString());
+
+            } catch (SyntaxError e) {
+                // catch Symja parser errors here
+            } catch (MathException me) {
+                // catch Symja math errors here
+            }
+
+        }
+        }
+
 
