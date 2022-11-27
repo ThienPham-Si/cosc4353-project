@@ -1,6 +1,6 @@
 import java.util.Map;
 
-public class Cos extends UnaryExpression implements Expression {
+public class Cos extends UnaryExpression{
 
 
     public Cos(Expression e) {
@@ -26,7 +26,7 @@ public class Cos extends UnaryExpression implements Expression {
     }
 
 
-    public Expression assign(String var, Expression expression) {
+    public Cos assign(String var, Expression expression) {
         Expression eAss = this.getE().assign(var, expression);
         return new Cos(eAss);
     }
@@ -35,7 +35,7 @@ public class Cos extends UnaryExpression implements Expression {
         return new Mult(new Neg(new Sin(this.getE())), eDiff);
     }
 
-    public Expression simplify() {
+    public Cos simplify() {
         if (super.simplify() != null) {
             return super.simplify();
         } else {

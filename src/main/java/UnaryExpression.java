@@ -63,7 +63,7 @@ public abstract class UnaryExpression extends BaseExpression {
 
     public abstract Expression differentiateCalculator(Expression eDiff, String var);
 
-    public Expression simplify() {
+    public Cos simplify() {
         try {
             return new Symbol.Num(this.evaluate());
         } catch (Exception ex) {

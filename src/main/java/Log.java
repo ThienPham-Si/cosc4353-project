@@ -3,7 +3,7 @@ import java.util.Map;
 /**
  * Log class.
  */
-public class Log extends BinaryExpression implements Expression {
+public class Log extends BinaryExpression{
     /**
      * constructor.
      *
@@ -122,7 +122,7 @@ public class Log extends BinaryExpression implements Expression {
      * @param expression expression
      * @return new expression
      */
-    public Expression assign(String var, Expression expression) {
+    public Log assign(String var, Expression expression) {
         Expression eAss = this.getE1().assign(var, expression);
         Expression baseAss = this.getE2().assign(var, expression);
         return new Log(baseAss, eAss);
@@ -137,7 +137,7 @@ public class Log extends BinaryExpression implements Expression {
      * @return differentiate
      */
     public Minus differentiateCalculator(Expression e1Diff, Expression e2Diff, String var) {
-        return new Div(e2Diff, new Mult(this.getE2(), new Log(new Var("e"), this.getE1())));
+        return new Div(e2Diff, new Mult(this.getE2(), String.valueOf(new Log(new Var("e"), this.getE1()))));
     }
 
     /**
@@ -145,9 +145,9 @@ public class Log extends BinaryExpression implements Expression {
      *
      * @return simplified version of the current expression
      */
-    public Expression simplify() {
-        if (super.simplify() != null) {
-            return super.simplify();
+    public Object simplify() {
+        if (simplify() != null) {
+            return simplify();
         } else {
             // log(x, x) = 1
             if (this.getE2().simplify().toString().equals(this.getE1().simplify().toString())) {

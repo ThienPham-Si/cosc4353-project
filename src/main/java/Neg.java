@@ -29,7 +29,7 @@ public class Neg extends UnaryExpression implements Expression {
         return new Neg(eDiff);
     }
 
-    public Expression simplify() {
+    public Cos simplify() {
         if (super.simplify() != null) {
             return super.simplify();
         }

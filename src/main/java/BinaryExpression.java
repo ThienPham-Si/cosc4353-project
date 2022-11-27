@@ -12,7 +12,7 @@ import java.util.Set;
 
  */
 
-public abstract class BinaryExpression{
+public abstract class BinaryExpression {
 
 // members
 
@@ -21,15 +21,10 @@ public abstract class BinaryExpression{
     public Expression e2;
 
     /**
-
      * constructor for 2 expressions.
-
      *
-
      * @param e1 left
-
      * @param e2 right
-
      */
 
     public BinaryExpression(Expression e1, Expression e2) {
@@ -41,15 +36,10 @@ public abstract class BinaryExpression{
     }
 
     /**
-
      * constructor for expression in left and variable in right.
-
      *
-
-     * @param e1 left
-
+     * @param e1  left
      * @param var right
-
      */
 
     public BinaryExpression(Expression e1, String var) {
@@ -59,15 +49,10 @@ public abstract class BinaryExpression{
     }
 
     /**
-
      * constructor for expression in left and number in right.
-
      *
-
-     * @param e1 left
-
+     * @param e1  left
      * @param num right
-
      */
 
     public BinaryExpression(Expression e1, double num) {
@@ -77,15 +62,10 @@ public abstract class BinaryExpression{
     }
 
     /**
-
      * constructor for variable in left and expression in right.
-
      *
-
      * @param var left
-
-     * @param e2 right
-
+     * @param e2  right
      */
 
     public BinaryExpression(String var, Expression e2) {
@@ -95,15 +75,10 @@ public abstract class BinaryExpression{
     }
 
     /**
-
      * constructor for 2 variables.
-
      *
-
      * @param var1 left
-
      * @param var2 right
-
      */
 
     public BinaryExpression(String var1, String var2) {
@@ -113,15 +88,10 @@ public abstract class BinaryExpression{
     }
 
     /**
-
      * constructor for variable in left and number in right.
-
      *
-
      * @param var left
-
      * @param num right
-
      */
 
     public BinaryExpression(String var, double num) {
@@ -131,15 +101,10 @@ public abstract class BinaryExpression{
     }
 
     /**
-
      * constructor for number in left and expression in right.
-
      *
-
      * @param num left
-
-     * @param e2 right
-
+     * @param e2  right
      */
 
     public BinaryExpression(double num, Expression e2) {
@@ -149,15 +114,10 @@ public abstract class BinaryExpression{
     }
 
     /**
-
      * constructor for number in left and variable in right.
-
      *
-
      * @param num left
-
      * @param var right
-
      */
 
     public BinaryExpression(double num, String var) {
@@ -167,15 +127,10 @@ public abstract class BinaryExpression{
     }
 
     /**
-
      * constructor for 2 numbers.
-
      *
-
      * @param num1 left
-
      * @param num2 right
-
      */
 
     public BinaryExpression(double num1, double num2) {
@@ -185,13 +140,9 @@ public abstract class BinaryExpression{
     }
 
     /**
-
      * get member e1.
-
      *
-
      * @return e1
-
      */
 
     public Expression getE1() {
@@ -201,13 +152,9 @@ public abstract class BinaryExpression{
     }
 
     /**
-
      * get member e2.
-
      *
-
      * @return e2
-
      */
 
     public Expression getE2() {
@@ -217,13 +164,9 @@ public abstract class BinaryExpression{
     }
 
     /**
-
      * Returns a list of the variables in the expression.
-
      *
-
      * @return list of the variables
-
      */
 
     public List<String> getVariables() {
@@ -250,7 +193,7 @@ public abstract class BinaryExpression{
 
     }
 
-    public Expression differentiate(String var) {
+    public Minus differentiate(String var) {
 
         Expression e1Diff = this.e1.differentiate(var);
 
@@ -271,24 +214,13 @@ public abstract class BinaryExpression{
 
     public abstract Minus differentiateCalculator(Expression e1Diff, Expression e2Diff, String var);
 
+
     /**
      * Returned a simplified version of the current expression.
      *
      * @return simplified version of the current expression
      */
 
-    public Object simplify() {
-
-        try {
-
-            return new Symbol.Num(this.());
-
-        } catch (Exception ex) {
-
-            return null;
-
-        }
 
     }
 
-}

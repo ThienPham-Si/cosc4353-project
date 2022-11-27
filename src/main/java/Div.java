@@ -1,6 +1,6 @@
 import java.util.Map;
 
-public class Div extends BinaryExpression implements Expression {
+public class Div extends BinaryExpression {
 
     public Div(Expression e1, Expression e2) {
 
@@ -165,22 +165,16 @@ public class Div extends BinaryExpression implements Expression {
     }
 
     /**
-
      * Returns a new expression in which all occurrences of the variable var are replaced with the provided expression
-
+     * <p>
      * (Does not modify the current expression).
-
      *
-
-     * @param var variable
-
+     * @param var        variable
      * @param expression expression
-
      * @return new expression
-
      */
 
-    public Expression assign(String var, Expression expression) {
+    public Div assign(String var, Expression expression) {
 
         Expression e1Ass = this.getE1().assign(var, expression);
 
@@ -201,27 +195,21 @@ public class Div extends BinaryExpression implements Expression {
 
     public Minus differentiateCalculator(Expression e1Diff, Expression e2Diff, String var) {
 
-        return new Div(new Minus(new Mult(e1Diff, this.getE2()), new Mult(e2Diff, this.getE1())), new Pow(this.getE2(),
-
-                2));
+        return new Div(String.valueOf(new Minus(new Mult(e1Diff, this.getE2()), new Mult(e2Diff, this.getE1()))), new Pow(this.getE2(), 2));
 
     }
 
     /**
-
      * Returned a simplified version of the current expression.
-
      *
-
      * @return simplified version of the current expression
-
      */
 
-    public Expression simplify() {
+    public Object simplify() {
 
-        if (super.simplify() != null) {
+        if (simplify() != null) {
 
-            return super.simplify();
+            return simplify();
 
         } else {
 
@@ -261,7 +249,7 @@ public class Div extends BinaryExpression implements Expression {
 
         }
 
-        return this.simplify();
+        return (Expression) this.simplify();
 
     }
 

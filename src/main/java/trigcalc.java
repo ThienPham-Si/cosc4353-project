@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class trigcalc {
 
-    public static void main(String[] args) {
+    public void main(String[] args) {
 
         System.out.println("Welcome to the trigonometry calculator!");
         Scanner scan = new Scanner(System.in);
@@ -36,7 +36,8 @@ public class trigcalc {
         }
     }
 
-    public static double sine(){
+
+    double sine(){
         // Ask for user input
         System.out.print("Enter an angle in degrees: ");
         // use scanner to read the console input

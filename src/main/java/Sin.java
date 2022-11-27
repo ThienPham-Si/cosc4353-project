@@ -31,7 +31,7 @@ public class Sin extends UnaryExpression implements Expression {
         return new Mult(new Cos(this.getE()), eDiff);
     }
 
-    public Expression simplify() {
+    public Cos simplify() {
         if (super.simplify() != null) {
             return super.simplify();
         } else {

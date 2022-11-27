@@ -60,9 +60,9 @@ public class Minus extends BinaryExpression{
         return new Minus(e1Diff, e2Diff);
     }
 
-    public Expression simplify() {
-        if (super.simplify() != null) {
-            return super.simplify();
+    public Minus simplify() {
+        if (simplify() != null) {
+            return simplify();
         }
         else {
             if (this.getE1().toString().equals("0.0")) {
@@ -74,7 +74,7 @@ public class Minus extends BinaryExpression{
             else if (this.getE1().simplify().toString().equals(this.getE2().simplify().toString())) { // X - X = 0
                 return new Symbol.Num(0);
             }
-            return new Minus(this.getE1().simplify(), this.getE2().simplify());
+            return new Minus(this.zgetE1().simplify(), this.getE2().simplify());
         }
     }
 
