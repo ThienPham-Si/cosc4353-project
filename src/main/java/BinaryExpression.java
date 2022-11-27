@@ -12,7 +12,7 @@ import java.util.Set;
 
  */
 
-public abstract class BinaryExpression extends BaseExpression {
+public abstract class BinaryExpression{
 
 // members
 
