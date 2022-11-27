@@ -1,3 +1,8 @@
+import simplification.Div;
+import simplification.Minus;
+import simplification.Mult;
+import simplification.Plus;
+
 import java.util.*;
 
 public class Main {
@@ -15,7 +20,7 @@ public class Main {
             System.out.println(
                     "Choose the type of problem:\n" +
                             "1. Basic Operations\n" +
-                            "2. Solve\n" +
+                            "2. Simplify\n" +
                             "3. Matrix\n" +
                             "4. Set\n" +
                             "5. Quit"
@@ -27,6 +32,9 @@ public class Main {
                     System.out.print("Enter your expression \n");
                     Expr ex1 = new Expr(sc.next());
                     System.out.println(ex1.getExpressionString() + " = " + ex1.eval());
+                }
+                if (choice==2){
+                    simplify(sc);
                 }
                 if (choice == 3) {
                     System.out.print("How many Matrices?\n");
@@ -91,8 +99,7 @@ public class Main {
     public static double[][] readMatrixByUser()
     {
         int m, n, i, j;
-        Scanner in = null;
-        in = new Scanner(System.in);
+        Scanner in = new Scanner(System.in);
         System.out.println("Enter the number "
                 + "of rows and cols of the matrix (m*n)");
         m = in.nextInt();
@@ -109,6 +116,43 @@ public class Main {
 
         return first;
 
+    }
+
+    public static void simplify(Scanner sc) {
+        System.out.println("Enter the expression");
+        String exp = sc.next();
+
+        // example: 2x, +, 3x
+        exp = exp.replaceAll("\\s", "");
+        String[] operators = exp.split("(?<=[-+*/])|(?=[-+*/])");
+        Mult[] binaryExpressions = new Mult[operators.length];
+        for (int i = 0; i < operators.length; i++) {
+            if (i % 2 == 0) {
+                String[] part = operators[i].split("(?<=\\d)(?=\\D)");
+                int coeff = Integer.parseInt(part[0]);
+                String var = part[1];
+                binaryExpressions[i] = new Mult(coeff, var);
+            } else {
+                operators[i] = operators[i];
+            }
+        }
+
+        switch ((operators[1])) {
+            case "+":
+                System.out.println(new Plus((Mult) binaryExpressions[0], (Mult) binaryExpressions[2]).advancedSimplify());
+                break;
+            case "-":
+                System.out.println(new Minus((Mult) binaryExpressions[0], (Mult) binaryExpressions[2]).advancedSimplify());
+                break;
+            case "*":
+                System.out.println(new Mult((Mult) binaryExpressions[0], (Mult) binaryExpressions[2]).advancedSimplify());
+                break;
+            case "/":
+                System.out.println(new Div((Mult) binaryExpressions[0], (Mult) binaryExpressions[2]).advancedSimplify());
+                break;
+            default:
+                break;
+        }
     }
 }
 
