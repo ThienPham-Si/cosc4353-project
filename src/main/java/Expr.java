@@ -1,19 +1,21 @@
-import java.util.*;
-
-public class Expression {
+public class Expr {
     private BasicOps basicOps = new BasicOps();
     String expressionString;
     private String expressionStringCleaned;
 	private String description;
+    protected String label = null;
 
-    public Expression(String expression) {
+    public Expr(String expression) {
         this.expressionString = expression;
 	}
 
     public void setExpressionString(String expression){
         this.expressionString = expression;
     }
-
+    public Expr setLabel(String label) {
+        this.label = label;
+        return this;
+    }
     public String getExpressionString() {
 		return expressionString;
 	}
