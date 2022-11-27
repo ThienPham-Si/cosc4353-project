@@ -1,7 +1,4 @@
-import simplification.Div;
-import simplification.Minus;
-import simplification.Mult;
-import simplification.Plus;
+import simplification.*;
 
 import java.util.*;
 
@@ -128,38 +125,31 @@ public class Main {
     public static void simplify(Scanner sc) {
         System.out.println("Enter the expression");
         String exp = sc.next();
-
-        // example: 2x, +, 3x
         exp = exp.replaceAll("\\s", "");
         String[] operators = exp.split("(?<=[-+*/])|(?=[-+*/])");
-        Mult[] binaryExpressions = new Mult[operators.length];
+        Expression[] binaryExpressions = new Expression[operators.length];
         for (int i = 0; i < operators.length; i++) {
-            if (i % 2 == 0) {
+            if(i%2==0){
                 String[] part = operators[i].split("(?<=\\d)(?=\\D)");
                 int coeff = Integer.parseInt(part[0]);
                 String var = part[1];
                 binaryExpressions[i] = new Mult(coeff, var);
-            } else {
-                operators[i] = operators[i];
             }
         }
 
-        switch ((operators[1])) {
-            case "+":
-                System.out.println(new Plus((Mult) binaryExpressions[0], (Mult) binaryExpressions[2]).advancedSimplify());
-                break;
-            case "-":
-                System.out.println(new Minus((Mult) binaryExpressions[0], (Mult) binaryExpressions[2]).advancedSimplify());
-                break;
-            case "*":
-                System.out.println(new Mult((Mult) binaryExpressions[0], (Mult) binaryExpressions[2]).advancedSimplify());
-                break;
-            case "/":
-                System.out.println(new Div((Mult) binaryExpressions[0], (Mult) binaryExpressions[2]).advancedSimplify());
-                break;
-            default:
-                break;
+        for (int i = 1; i < operators.length; i+=2) {
+            switch ((operators[i])) {
+                case "+" ->
+                        System.out.println(new Plus(binaryExpressions[0], binaryExpressions[2]).advancedSimplify());
+                case "-" ->
+                        System.out.println(new Minus(binaryExpressions[0], binaryExpressions[2]).advancedSimplify());
+                case "*" ->
+                        System.out.println(new Mult(binaryExpressions[0], binaryExpressions[2]).advancedSimplify());
+                case "/" ->
+                        System.out.println(new Div(binaryExpressions[0], binaryExpressions[2]).advancedSimplify());
+                default -> {
+                }
+            }
         }
-    }
-}
+}}
 
