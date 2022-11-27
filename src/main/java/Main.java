@@ -30,8 +30,15 @@ public class Main {
             if( choice != 4) {
                 if (choice == 1) {
                     System.out.print("Enter your expression \n");
-                    Expr ex1 = new Expr(sc.next());
-                    System.out.println(ex1.getExpressionString() + " = " + ex1.eval());
+                    while (true){
+
+                        String userInput = sc.next();
+                        if("exit".equalsIgnoreCase(userInput)) {
+                            break;
+                        }
+                        Expr ex1 = new Expr(userInput);
+                        System.out.println(ex1.getExpressionString() + " = " + ex1.eval());
+                    }
                 }
                 if (choice==2){
                     simplify(sc);
