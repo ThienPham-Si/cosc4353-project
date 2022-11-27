@@ -49,7 +49,7 @@ public class Mult extends BinaryExpression implements Expression {
         return new Mult(e1Ass, e2Ass);
     }
 
-    public Expression differentiateCalculator(Expression e1Diff, Expression e2Diff, String var) {
+    public Minus differentiateCalculator(Expression e1Diff, Expression e2Diff, String var) {
         return new Plus(new Mult(e1Diff, this.getE2()), new Mult(e2Diff, this.getE1()));
     }
 

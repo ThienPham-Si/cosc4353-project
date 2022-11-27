@@ -191,22 +191,15 @@ public class Div extends BinaryExpression implements Expression {
     }
 
     /**
-
      * Calculate the differentiate according to the operator.
-
      *
-
      * @param e1Diff expression's differentiate
-
      * @param e2Diff expression's differentiate
-
-     * @param var variable
-
+     * @param var    variable
      * @return differentiate
-
      */
 
-    public Expression differentiateCalculator(Expression e1Diff, Expression e2Diff, String var) {
+    public Minus differentiateCalculator(Expression e1Diff, Expression e2Diff, String var) {
 
         return new Div(new Minus(new Mult(e1Diff, this.getE2()), new Mult(e2Diff, this.getE1())), new Pow(this.getE2(),
 

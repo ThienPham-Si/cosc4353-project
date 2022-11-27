@@ -1,6 +1,6 @@
 import java.util.Map;
 
-public class Minus extends BinaryExpression implements Expression {
+public class Minus extends BinaryExpression{
 
     public Minus(Expression e1, Expression e2) {
         super(e1, e2);
@@ -50,13 +50,13 @@ public class Minus extends BinaryExpression implements Expression {
         return String.format("(%s - %s)", this.getE1().toString(), this.getE2().toString());
     }
 
-    public Expression assign(String var, Expression expression) {
+    public Minus assign(String var, Expression expression) {
         Expression e1Ass = this.getE1().assign(var, expression);
         Expression e2Ass = this.getE2().assign(var, expression);
         return new Minus(e1Ass, e2Ass);
     }
 
-    public Expression differentiateCalculator(Expression e1Diff, Expression e2Diff, String var) {
+    public Minus differentiateCalculator(Expression e1Diff, Expression e2Diff, String var) {
         return new Minus(e1Diff, e2Diff);
     }
 

@@ -137,7 +137,7 @@ public class Plus extends BinaryExpression implements Expression {
      * @param var    variable
      * @return differentiate
      */
-    public Expression differentiateCalculator(Expression e1Diff, Expression e2Diff, String var) {
+    public Minus differentiateCalculator(Expression e1Diff, Expression e2Diff, String var) {
         return new Plus(e1Diff, e2Diff);
     }
 

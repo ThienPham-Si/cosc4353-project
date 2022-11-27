@@ -136,7 +136,7 @@ public class Log extends BinaryExpression implements Expression {
      * @param var    variable
      * @return differentiate
      */
-    public Expression differentiateCalculator(Expression e1Diff, Expression e2Diff, String var) {
+    public Minus differentiateCalculator(Expression e1Diff, Expression e2Diff, String var) {
         return new Div(e2Diff, new Mult(this.getE2(), new Log(new Var("e"), this.getE1())));
     }
 

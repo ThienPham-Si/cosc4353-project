@@ -261,38 +261,27 @@ public abstract class BinaryExpression{
     }
 
     /**
-
      * Calculate the differentiate according to the operator.
-
      *
-
      * @param e1Diff expression's differentiate
-
      * @param e2Diff expression's differentiate
-
-     * @param var variable
-
+     * @param var    variable
      * @return differentiate
-
      */
 
-    public abstract Expression differentiateCalculator(Expression e1Diff, Expression e2Diff, String var);
+    public abstract Minus differentiateCalculator(Expression e1Diff, Expression e2Diff, String var);
 
     /**
-
      * Returned a simplified version of the current expression.
-
      *
-
      * @return simplified version of the current expression
-
      */
 
-    public Expression simplify() {
+    public Object simplify() {
 
         try {
 
-            return new Symbol.Num(this.evaluate());
+            return new Symbol.Num(this.());
 
         } catch (Exception ex) {
 
