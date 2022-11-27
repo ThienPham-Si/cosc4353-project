@@ -57,7 +57,7 @@ public class Pow extends BinaryExpression implements Expression {
         return null;
     }
 
-    public Minus differentiateCalculator(Expression e1Diff, Expression e2Diff, String var) {
+    public Div differentiateCalculator(Expression e1Diff, Expression e2Diff, String var) {
         List e2Variables = (List) this.getE2().getVariables();
         if ((e2Variables != null) && (e2Variables.contains(var))) {
             Expression tempExponent = new Mult(this.getE2(), new Log(new Var("e"), this.getE1()));

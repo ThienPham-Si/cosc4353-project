@@ -212,7 +212,7 @@ public abstract class BinaryExpression {
      * @return differentiate
      */
 
-    public abstract Minus differentiateCalculator(Expression e1Diff, Expression e2Diff, String var);
+    public abstract Div differentiateCalculator(Expression e1Diff, Expression e2Diff, String var);
 
 
     /**

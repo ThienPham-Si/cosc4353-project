@@ -5,7 +5,7 @@ import java.util.Set;
 /**
  * Unary expression interface.
  */
-public abstract class UnaryExpression extends BaseExpression {
+public abstract class UnaryExpression{
     // members
     private Expression e;
 
@@ -63,7 +63,7 @@ public abstract class UnaryExpression extends BaseExpression {
 
     public abstract Expression differentiateCalculator(Expression eDiff, String var);
 
-    public Cos simplify() {
+    public Sin simplify() {
         try {
             return new Symbol.Num(this.evaluate());
         } catch (Exception ex) {

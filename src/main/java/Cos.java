@@ -35,7 +35,7 @@ public class Cos extends UnaryExpression{
         return new Mult(new Neg(new Sin(this.getE())), eDiff);
     }
 
-    public Cos simplify() {
+    public Sin simplify() {
         if (super.simplify() != null) {
             return super.simplify();
         } else {

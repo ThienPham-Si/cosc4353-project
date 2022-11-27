@@ -193,7 +193,7 @@ public class Div extends BinaryExpression {
      * @return differentiate
      */
 
-    public Minus differentiateCalculator(Expression e1Diff, Expression e2Diff, String var) {
+    public Div differentiateCalculator(Expression e1Diff, Expression e2Diff, String var) {
 
         return new Div(String.valueOf(new Minus(new Mult(e1Diff, this.getE2()), new Mult(e2Diff, this.getE1()))), new Pow(this.getE2(), 2));
 

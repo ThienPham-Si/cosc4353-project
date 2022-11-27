@@ -56,11 +56,11 @@ public class Minus extends BinaryExpression{
         return new Minus(e1Ass, e2Ass);
     }
 
-    public Minus differentiateCalculator(Expression e1Diff, Expression e2Diff, String var) {
+    public Div differentiateCalculator(Expression e1Diff, Expression e2Diff, String var) {
         return new Minus(e1Diff, e2Diff);
     }
 
-    public Minus simplify() {
+    public Object simplify() {
         if (simplify() != null) {
             return simplify();
         }
@@ -69,24 +69,24 @@ public class Minus extends BinaryExpression{
                 return new Neg(this.getE2().simplify());
             }
             else if (this.getE2().simplify().toString().equals("0.0")) {
-                return this.getE1().simplify();
+                return (Neg) this.getE1().simplify();
             }
             else if (this.getE1().simplify().toString().equals(this.getE2().simplify().toString())) { // X - X = 0
                 return new Symbol.Num(0);
             }
-            return new Minus(this.zgetE1().simplify(), this.getE2().simplify());
+            return new Minus(this.getE1().simplify(), this.getE2().simplify());
         }
     }
 
     public Expression advancedSimplify() {
 // (x + y) - (y + x) = 0
         if ((this.getE1() instanceof Plus) && (this.getE2() instanceof Plus) && (this.getE1().toString().
-                equals(new Plus(((Plus) this.getE2()).getE2(), ((Plus) this.getE2()).getE1()).toString()))) {
+                equals(new Plus(((Plus) this.getE2()).getE2(), String.valueOf(((Plus) this.getE2()).getE1())).toString()))) {
             return new Symbol.Num(0);
 // (y + x) - (x + y) = 0
         }
         else if ((this.getE1() instanceof Plus) && (this.getE2() instanceof Plus) && (this.getE2().toString().
-                equals(new Plus(((Plus) this.getE1()).getE2(), ((Plus) this.getE1()).getE1()).toString()))) {
+                equals(new Plus(((Plus) this.getE1()).getE2(), String.valueOf(((Plus) this.getE1()).getE1())).toString()))) {
             return new Symbol.Num(0);
 // (x * y) - (y * x) = 0
         }
@@ -99,6 +99,6 @@ public class Minus extends BinaryExpression{
                 equals(new Mult(((Mult) this.getE1()).getE2(), ((Mult) this.getE1()).getE1()).toString()))) {
             return new Symbol.Num(0);
         }
-        return this.simplify();
+        return (Expression) this.simplify();
     }
 }

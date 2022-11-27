@@ -1,5 +1,5 @@
 import java.util.Map;
-public class Mult extends BinaryExpression implements Expression {
+public class Mult extends BinaryExpression{
     public Mult(Expression e1, Expression e2) {
         super(e1, e2);
     }
@@ -46,16 +46,16 @@ public class Mult extends BinaryExpression implements Expression {
     public Expression assign(String var, Expression expression) {
         Expression e1Ass = this.getE1().assign(var, expression);
         Expression e2Ass = this.getE2().assign(var, expression);
-        return new Mult(e1Ass, e2Ass);
+        return new Expression(e1Ass, e2Ass);
     }
 
-    public Minus differentiateCalculator(Expression e1Diff, Expression e2Diff, String var) {
-        return new Plus(new Mult(e1Diff, this.getE2()), new Mult(e2Diff, this.getE1()));
+    public Div differentiateCalculator(Expression e1Diff, Expression e2Diff, String var) {
+        return new Plus(new Mult(e1Diff, this.getE2()), String.valueOf(new Mult(e2Diff, this.getE1())));
     }
 
     public Expression simplify() {
-        if (super.simplify() != null) {
-            return super.simplify();
+        if (simplify() != null) {
+            return simplify();
         }
         else {
 // 0 * x = 0 or x * 0 = 0
@@ -76,12 +76,12 @@ public class Mult extends BinaryExpression implements Expression {
         }
         else if ((this.getE2() instanceof Pow) && (this.getE1().toString().equals(((Pow) this.getE2()).getE1().
                 toString()))) { // x * (x^2) = x^3
-            return new Pow(this.getE1(), new Plus(((Pow) this.getE2()).getE2(), new Symbol.Num(1))).simplify().
+            return new Pow(this.getE1(), new Plus(((Pow) this.getE2()).getE2(), String.valueOf(new Symbol.Num(1)))).simplify().
                     advancedSimplify();
         }
         else if ((this.getE1() instanceof Pow) && (this.getE2().toString().equals(((Pow) this.getE1()).getE1().
                 toString()))) { // (x^2) * x = x^3
-            return new Pow(this.getE2(), new Plus(((Pow) this.getE1()).getE2(), new Symbol.Num(1))).simplify().
+            return new Pow(this.getE2(), new Plus(((Pow) this.getE1()).getE2(), String.valueOf(new Symbol.Num(1)))).simplify().
                     advancedSimplify();
         }
         return this.simplify();

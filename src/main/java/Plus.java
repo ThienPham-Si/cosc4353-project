@@ -11,7 +11,7 @@ public class Plus extends BinaryExpression implements Expression {
      * @param e1 left
      * @param e2 right
      */
-    public Plus(Expression e1, Expression e2) {
+    public Plus(Log e1, Log e2) {
         super(e1, e2);
     }
 
@@ -51,7 +51,7 @@ public class Plus extends BinaryExpression implements Expression {
      * @param var1 left
      * @param var2 right
      */
-    public Plus(String var1, String var2) {
+    public Plus(Mult var1, String var2) {
         super(var1, var2);
     }
 
@@ -71,7 +71,7 @@ public class Plus extends BinaryExpression implements Expression {
      * @param num left
      * @param e2  right
      */
-    public Plus(double num, Expression e2) {
+    public Plus(Div num, Div e2) {
         super(num, e2);
     }
 
@@ -137,7 +137,7 @@ public class Plus extends BinaryExpression implements Expression {
      * @param var    variable
      * @return differentiate
      */
-    public Minus differentiateCalculator(Expression e1Diff, Expression e2Diff, String var) {
+    public Div differentiateCalculator(Expression e1Diff, Expression e2Diff, String var) {
         return new Plus(e1Diff, e2Diff);
     }
 
