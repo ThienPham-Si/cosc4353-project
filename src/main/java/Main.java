@@ -121,7 +121,7 @@ public class Main {
         while (true){
             System.out.print("Enter the set name\n");
             String setName = scanner.next();
-            if("exit".equalsIgnoreCase(setName)){
+            if("done".equalsIgnoreCase(setName)){
                 break;
             }
             System.out.print("Enter the set elements\n");
