@@ -11,9 +11,12 @@ This project was made to convert the equations and functions of SymPy, a Python-
     Example: 
 	
 	Enter your expression
-	6^2+cos(45) ==> 6^2+cos(45) = 36.707106781186546
-	(6.7*10^-7)*(2.7*10^11) ==> (6.7*10^-7)*(2.7*10^11) = 180900.0
-	(1/21)+(1/3) ==> (1/21)+(1/3) = 0.38095238095238093
+	6^2+cos(45)
+	==> 6^2+cos(45) = 36.707106781186546
+	(6.7*10^-7)*(2.7*10^11)
+	==> (6.7*10^-7)*(2.7*10^11) = 180900.0
+	(1/21)+(1/3)
+	==> (1/21)+(1/3) = 0.38095238095238093
 
 ## 2) Simplify - condense equations ranging from algebraic expressions, to multi-variable equations
     
@@ -21,19 +24,27 @@ This project was made to convert the equations and functions of SymPy, a Python-
 	Example: 
 	
 	Enter the expression
-	5x+7x ==> (12.0 * x)
-	5y-2x ==> ((5.0 * y) - (2.0 * x))
-	4y/4y ==> 1.0
+	5x+7x
+	==> (12.0 * x)
+	5y-2x
+	==> ((5.0 * y) - (2.0 * x))
+	4y/4y
+	==> 1.0
 
 ## 3) Solve/Expand - expands an equation to fully algebraic expression, and/or solves algebraic equations
     
 	
 	Exmaple: Enter the expression
-	Solve(x^2 == 49,x) ==> {{x->-7},{x->7}}
-	Solve(sqrt(x-8)==3,x) ==> {{x->17}}
-	Expand(1/(x+3)+1/(x+3)==10/(x^2-9),x) ==> 2/(3+x)==10/(-9+x^2)
-	Expand((2x-4)(x-5)) ==> 20-14*x+2*x^2
-	Expand((x^2+3y)^3) ==> x^6+9*x^4*y+27*x^2*y^2+27*y^3
+	Solve(x^2 == 49,x)
+	==> {{x->-7},{x->7}}
+	Solve(sqrt(x-8)==3,x)
+	==> {{x->17}}
+	Expand(1/(x+3)+1/(x+3)==10/(x^2-9),x)
+	==> 2/(3+x)==10/(-9+x^2)
+	Expand((2x-4)(x-5))
+	==> 20-14*x+2*x^2
+	Expand((x^2+3y)^3)
+	==> x^6+9*x^4*y+27*x^2*y^2+27*y^3
 
 
 ## 4) Matrix - Creates a single or multiple matricies based off n rows and n columns, specified by the user, and then allows the user to either print the matrix, transpose the matrix, or multiply a matrix by another
