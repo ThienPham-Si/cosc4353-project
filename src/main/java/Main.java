@@ -24,11 +24,12 @@ public class Main {
                             "2. Simplify\n" +
                             "3. Solve/Expand\n" +
                             "4. Matrix\n" +
-                            "5. Quit"
+                            "5. Sets\n"  +
+                            "6. Quit"
             );
             System.out.print("Enter your choice: \n");
             choice = sc.nextInt();
-            if( choice != 5) {
+            if( choice != 6) {
                 if (choice == 1) {
                     System.out.print("Enter your expression \n");
                     while (true){
@@ -105,9 +106,125 @@ public class Main {
                     }
                 }
 
-            }
-        }while(choice != 5);
+                if (choice==5){
+                    setFunction(sc);
+                }
 
+            }
+        }while(choice != 6);
+
+    }
+
+    public static void setFunction(Scanner scanner){
+        Map<String, Sets> sets = new HashMap<>();
+        boolean exit;
+        while (true){
+            System.out.print("Enter the set name\n");
+            String setName = scanner.next();
+            if("exit".equalsIgnoreCase(setName)){
+                break;
+            }
+            System.out.print("Enter the set elements\n");
+            Sets userSet = getSet(scanner);
+            sets.put(setName, userSet);
+        }
+
+
+
+        while (true) {
+            exit = false;
+            System.out.print("What set do you want?\n");
+            String setName = scanner.next();
+            if("exit".equalsIgnoreCase(setName)){
+                break;
+            }
+            Sets userSet = sets.get(setName);
+
+            while(true){
+            System.out.print(setName + " - What operation do you want?\n");
+            String operation = scanner.next();
+            switch (operation) {
+                case "add" -> {
+                    System.out.print("Enter the number:\n");
+                    int userInput = scanner.nextInt();
+                    userSet.add(userInput);
+                    break;
+                }
+                case "p" -> {
+                    userSet.printSet();
+                }
+                case "subset" -> {
+                    System.out.print("Enter the 2nd set name:\n");
+                    String secondSetName = scanner.next();
+                    Sets secondSet = sets.get(secondSetName);
+                    System.out.println(setName + " is a subset of " + secondSetName + "? =>"+userSet.isSubset(secondSet));
+                }
+                case "union" -> {
+                    System.out.print("Enter the 2nd set name:\n");
+                    String secondSetName = scanner.next();
+                    Sets secondSet = sets.get(secondSetName);
+                    userSet = userSet.union(secondSet);
+                    System.out.println("The union of " + setName + " and " + secondSetName + " is: " + userSet);
+                    sets.put(setName, userSet);
+                    break;
+                }
+                case "intersection" -> {
+                    System.out.print("Enter the 2nd set name:\n");
+                    String secondSetName = scanner.next();
+                    Sets secondSet = sets.get(secondSetName);
+                    userSet = userSet.intersection(secondSet);
+                    System.out.println("The intersection of " + setName + " and " + secondSetName + " is: " + userSet);
+                    sets.put(setName, userSet);
+                    break;
+                }
+                case "difference" -> {
+                    System.out.print("Enter the 2nd set name:\n");
+                    String secondSetName = scanner.next();
+                    Sets secondSet = sets.get(secondSetName);
+                    userSet = userSet.difference(secondSet);
+                    System.out.println("The difference of " + setName + " and " + secondSetName + " is: " + userSet);
+                    sets.put(setName, userSet);
+                    break;
+                }
+                case "symmetricDifference" -> {
+                    System.out.print("Enter the 2nd set name:\n");
+                    String secondSetName = scanner.next();
+                    Sets secondSet = sets.get(secondSetName);
+                    userSet = userSet.symmetricDifference(secondSet);
+                    System.out.println("The symmetric difference of " + setName + " and " + secondSetName + " is: " + userSet);
+                    sets.put(setName, userSet);
+                    break;
+                }
+                case "cartesianProduct" -> {
+                    System.out.print("Enter the 2nd set name:\n");
+                    String secondSetName = scanner.next();
+                    Sets secondSet = sets.get(secondSetName);
+                    userSet = userSet.cartesianProduct(secondSet);
+                    System.out.println("The cartesian product of " + setName + " and " + secondSetName + " is: " + userSet);
+                    sets.put(setName, userSet);
+                    break;
+                }
+                case "showall" -> {
+                    for (String name: sets.keySet()) {
+                        String key = name.toString();
+                        System.out.println(key);
+                        Sets value = sets.get(name);
+                        value.printSet();
+                    }
+
+                }
+                case "changeSet" -> {
+                    exit = true;
+                    break;
+                }
+                default -> {
+                    break;
+                }
+            }
+            if(exit){
+                break;
+            }}
+        }
     }
     public static double[][] readMatrixByUser()
     {
@@ -129,6 +246,25 @@ public class Main {
 
         return first;
 
+    }
+
+    public static Sets getSet(Scanner scanner){
+        Sets returnSet = new Sets();
+        System.out.println("Enter your sets, type `!` when you're finished");
+        scanner.useDelimiter("");
+        while (scanner.hasNext()) {
+            if (scanner.hasNextInt()) {
+                returnSet.add(scanner.nextInt());
+            } else {
+                String s1 = scanner.next();
+                if ("!".equalsIgnoreCase(s1)) {
+                    break;
+                }
+            }
+        }
+        scanner.useDelimiter("\n");
+        returnSet.printSet();
+        return returnSet;
     }
 
     public static void simplify(Scanner sc) {

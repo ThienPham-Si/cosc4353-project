@@ -10,6 +10,24 @@ public class Sets {
         hashset.add(obj);
     }
 
+    public void addAll(Object[] obj){
+        for (Object o : obj) {
+            hashset.add(o);
+        }
+    }
+
+    public void addAll(List<Object> obj){
+        for (Object o : obj) {
+            hashset.add(o);
+        }
+    }
+
+    public void addAll(Sets obj){
+        for (Object o : obj.hashset) {
+            hashset.add(o);
+        }
+    }
+
     public void remove(Object obj){
         hashset.remove(obj);
     }
@@ -59,6 +77,16 @@ public class Sets {
         return symmetricDifferenceSet;
     }
 
+    public Sets cartesianProduct(Sets set2){
+        Sets cartesianProductSet = new Sets();
+        for (Object o : this.hashset) {
+            for (Object o1 : set2.hashset) {
+                cartesianProductSet.add(new Object[]{o, o1});
+            }
+        }
+        return cartesianProductSet;
+    }
+
     public boolean isSubset(Sets set2){
         return set2.hashset.containsAll(this.hashset);
     }
@@ -73,6 +101,10 @@ public class Sets {
 
     public boolean isDisjoint(Sets set2){
         return this.intersection(set2).hashset.isEmpty();
+    }
+
+    public void printSet(){
+        System.out.println(hashset);
     }
 
 
