@@ -9,8 +9,7 @@ This project was made to convert the equations and functions of SymPy, a Python-
    
 Sympy functions converted to java:
 1) Basic Operations - solve calculations ranging from trigonomic functions, to multiple exponential equations.
-    Example: Enter your expression 
-              6^2+cos(45) ==> 6^2+cos(45) = 36.707106781186546
+    Example: Enter your expression 6^2+cos(45) ==> 6^2+cos(45) = 36.707106781186546
               6 ==> 6 = 6.0
               (6.7*10^-7)*(2.7*10^11) ==> (6.7*10^-7)*(2.7*10^11) = 180900.0
               (1/21)+(1/3) ==> (1/21)+(1/3) = 0.38095238095238093
