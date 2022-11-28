@@ -47,15 +47,12 @@ public class testing {
 
         try {
             ExprEvaluator util = new ExprEvaluator();
-
-            IExpr result = util.eval("ExpandAll(-2(3u-x)-v)");
+            String userInput = "solve(2*x+4=10)";
+            String[] inputs = userInput.split("\\(", 2);
+            IExpr result = util.eval("Solve(x^2 == 49,x)");
             // print: -6*u-v+2*x
             System.out.println(result.toString());
 
-            // Show an expression in the Java form:
-            String javaForm = util.toJavaForm("ExpandAll(-2(3u-x)-v)");
-            // prints: ExpandAll(Plus(Times(CN2,Plus(Times(C3,u),Negate(x))),Negate(v)))
-            System.out.println(javaForm.toString());
 
             // use the JavaForm:
 //            IAST function = ExpandAll(Plus(Times(CN2, Plus(Times(C3, u), Negate(x))), Negate(v)));
@@ -104,4 +101,9 @@ public class testing {
         }
 
     }
+    static String removeLastChar(String s)
+    {
+        return s.substring(0, s.length() - 1);
+    }
+
 }

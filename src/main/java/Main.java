@@ -22,8 +22,8 @@ public class Main {
                     "Choose the type of problem:\n" +
                             "1. Basic Operations\n" +
                             "2. Simplify\n" +
-                            "3. Matrix\n" +
-                            "4. Expand\n" +
+                            "3. Solve/Expand\n" +
+                            "4. Matrix\n" +
                             "5. Quit"
             );
             System.out.print("Enter your choice: \n");
@@ -44,10 +44,10 @@ public class Main {
                 if (choice==2){
                     simplify(sc);
                 }
-                if (choice==4) {
+                if (choice==3) {
                     expand(sc);
                 }
-                if (choice == 3) {
+                if (choice == 4) {
                     System.out.print("How many Matrices?\n");
                     int nMatrices = sc.nextInt();
                     Matrix[] arrayMatrices = new Matrix[nMatrices];
@@ -102,7 +102,7 @@ public class Main {
                     }
                 }
 
-                String restart = sc.next();
+//                String restart = sc.next();
             }
         }while(choice != 5);
 
@@ -131,7 +131,11 @@ public class Main {
 
     public static void simplify(Scanner sc) {
         System.out.println("Enter the expression");
+        while(true){
         String exp = sc.next();
+            if("exit".equalsIgnoreCase(exp)) {
+                break;
+            }
         exp = exp.replaceAll("\\s", "");
         String[] operators = exp.split("(?<=[-+*/])|(?=[-+*/])");
         Expression[] binaryExpressions = new Expression[operators.length];
@@ -147,34 +151,57 @@ public class Main {
         for (int i = 1; i < operators.length; i += 2) {
             switch ((operators[i])) {
                 case "+" -> System.out.println(new Plus(binaryExpressions[0], binaryExpressions[2]).advancedSimplify());
-                case "-" ->
-                        System.out.println(new Minus(binaryExpressions[0], binaryExpressions[2]).advancedSimplify());
+                case "-" -> System.out.println(new Minus(binaryExpressions[0], binaryExpressions[2]).advancedSimplify());
                 case "*" -> System.out.println(new Mult(binaryExpressions[0], binaryExpressions[2]).advancedSimplify());
                 case "/" -> System.out.println(new Div(binaryExpressions[0], binaryExpressions[2]).advancedSimplify());
                 default -> {
                 }
             }
         }
-    }
+    }}
 
     public static void expand(Scanner sc) {
         System.out.println("Enter the expression");
-        String exp = sc.next();
 
-            try {
-                ExprEvaluator util = new ExprEvaluator();
-
-                //try -2(3u-x)-v
-                IExpr result = util.eval("ExpandAll("+exp+")");
-                System.out.println(result.toString());
-
-            } catch (SyntaxError e) {
-                // catch Symja parser errors here
-            } catch (MathException me) {
-                // catch Symja math errors here
+        while(true){
+            String userInput = sc.next();
+            ExprEvaluator util = new ExprEvaluator();
+            if("exit".equalsIgnoreCase(userInput)) {
+                break;
             }
 
-        }
-        }
+            try {
+                    IExpr result = util.eval(userInput);
+                    System.out.println(result.toString());
+                } catch (SyntaxError ignored) {
+                }
 
+
+//            String[] inputs = userInput.split("\\(", 2);
+//            String exp = removeLastChar(inputs[1]);
+//            switch (inputs[0]){
+//                case "solve" -> {
+//                    try {
+//                        IExpr result = util.eval(exp);
+//                        System.out.println(result.toString());
+//                    } catch (SyntaxError e) {
+//                        System.out.println(e);
+//                    }
+//                }
+//                case "expand" ->{
+//                    try {
+//                        IExpr result = util.eval("ExpandAll("+exp+")");
+//                        System.out.println(result.toString());
+//                    } catch (SyntaxError e) {
+//                        System.out.println(e);
+//                    }
+//                }
+
+            }
+        }
+        static String removeLastChar(String s)
+        {
+            return s.substring(0, s.length() - 1);
+        }
+        }
 
