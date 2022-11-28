@@ -7,6 +7,11 @@ public class Atomic {
 		atomicID = atomicId;
 	}
 
+	public int getAtomicID() {
+		return atomicID;
+	}
+
+
     public int getMyTypeId() {
 		return atomicID;
 	}

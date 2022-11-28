@@ -48,53 +48,56 @@ public class Main {
                     expand(sc);
                 }
                 if (choice == 4) {
-                    System.out.print("How many Matrices?\n");
-                    int nMatrices = sc.nextInt();
-                    Matrix[] arrayMatrices = new Matrix[nMatrices];
-
-                    for (int i = 1; i <= nMatrices; i++) {
-                        System.out.print("Matrix " + i + "\n");
-                        Matrix matrix = new Matrix(readMatrixByUser());
-                        arrayMatrices[i-1] = matrix;
-                    }
+                    Matrix userMatrix = new Matrix(readMatrixByUser());
 
                     while (true){
                         exit = false;
-
-                        int pickedMatrix;
-                        if (nMatrices == 1){
-                            pickedMatrix = 0;
-                        } else {
-                            System.out.print("Which matrices you want to pick?\n");
-                            if (sc.hasNextInt()) {
-                                pickedMatrix = sc.nextInt() - 1;
-                            } else {
-                                break;
-                            }
-                        }
-
                         System.out.print("What operation do you want?\n");
                         String operation = sc.next();
                         switch (operation) {
-                            case "*":
-                                System.out.print("Pick the 2nd matrix\n");
-                                try{
-                                    int secondMatrix = sc.nextInt() - 1;
-                                    System.out.print(arrayMatrices[pickedMatrix].multiplyMatrix(arrayMatrices[secondMatrix]));
-                                    arrayMatrices[pickedMatrix]=arrayMatrices[pickedMatrix].multiplyMatrix(arrayMatrices[secondMatrix]);
-                                } catch(Exception e) {
-                                    System.out.print("Matrix not exist\n");
+                            case "*" -> {
+                                System.out.print("Enter the 2nd matrix\n");
+                                try {
+                                    Matrix secondMatrix = new Matrix(readMatrixByUser());
+                                    System.out.print(userMatrix.multiplyMatrix(secondMatrix));
+                                    userMatrix = userMatrix.multiplyMatrix(secondMatrix);
+                                } catch (Exception e) {
+                                    System.out.print(e);
                                 }
                                 break;
-                            case "t":
-                                System.out.print(arrayMatrices[pickedMatrix].tranpose());
-                                arrayMatrices[pickedMatrix] = arrayMatrices[pickedMatrix].tranpose();
+                            }
+                            case "+" -> {
+                                System.out.print("Enter the 2nd matrix\n");
+                                try {
+                                    Matrix secondMatrix = new Matrix(readMatrixByUser());
+                                    System.out.print(userMatrix.addMatrix(secondMatrix));
+                                    userMatrix = userMatrix.addMatrix(secondMatrix);
+                                } catch (Exception e) {
+                                    System.out.print(e);
+                                }
                                 break;
-                            case "p":
-                                arrayMatrices[pickedMatrix].printMatrix();
-                            default:
+                            }
+                            case "t" -> {
+                                System.out.print(userMatrix.tranpose());
+                                userMatrix = userMatrix.tranpose();
+                                break;
+                            }
+                            case "p" ->{
+                                userMatrix.printMatrix();
+                                break;
+                            }
+                            case "eigValue" -> {
+                                userMatrix.eigenValues();
+                                break;
+                            }
+                            case "eigVector" -> {
+                                userMatrix.eigenVectors();
+                                break;
+                            }
+                            default -> {
                                 exit = true;
                                 break;
+                            }
                         }
                         if(exit){
                             break;
@@ -102,7 +105,6 @@ public class Main {
                     }
                 }
 
-//                String restart = sc.next();
             }
         }while(choice != 5);
 
@@ -132,33 +134,33 @@ public class Main {
     public static void simplify(Scanner sc) {
         System.out.println("Enter the expression");
         while(true){
-        String exp = sc.next();
+            String exp = sc.next();
             if("exit".equalsIgnoreCase(exp)) {
                 break;
             }
-        exp = exp.replaceAll("\\s", "");
-        String[] operators = exp.split("(?<=[-+*/])|(?=[-+*/])");
-        Expression[] binaryExpressions = new Expression[operators.length];
-        for (int i = 0; i < operators.length; i++) {
-            if (i % 2 == 0) {
-                String[] part = operators[i].split("(?<=\\d)(?=\\D)");
-                int coeff = Integer.parseInt(part[0]);
-                String var = part[1];
-                binaryExpressions[i] = new Mult(coeff, var);
-            }
-        }
-
-        for (int i = 1; i < operators.length; i += 2) {
-            switch ((operators[i])) {
-                case "+" -> System.out.println(new Plus(binaryExpressions[0], binaryExpressions[2]).advancedSimplify());
-                case "-" -> System.out.println(new Minus(binaryExpressions[0], binaryExpressions[2]).advancedSimplify());
-                case "*" -> System.out.println(new Mult(binaryExpressions[0], binaryExpressions[2]).advancedSimplify());
-                case "/" -> System.out.println(new Div(binaryExpressions[0], binaryExpressions[2]).advancedSimplify());
-                default -> {
+            exp = exp.replaceAll("\\s", "");
+            String[] operators = exp.split("(?<=[-+*/])|(?=[-+*/])");
+            Expression[] binaryExpressions = new Expression[operators.length];
+            for (int i = 0; i < operators.length; i++) {
+                if (i % 2 == 0) {
+                    String[] part = operators[i].split("(?<=\\d)(?=\\D)");
+                    int coeff = Integer.parseInt(part[0]);
+                    String var = part[1];
+                    binaryExpressions[i] = new Mult(coeff, var);
                 }
             }
-        }
-    }}
+
+            for (int i = 1; i < operators.length; i += 2) {
+                switch ((operators[i])) {
+                    case "+" -> System.out.println(new Plus(binaryExpressions[0], binaryExpressions[2]).advancedSimplify());
+                    case "-" -> System.out.println(new Minus(binaryExpressions[0], binaryExpressions[2]).advancedSimplify());
+                    case "*" -> System.out.println(new Mult(binaryExpressions[0], binaryExpressions[2]).advancedSimplify());
+                    case "/" -> System.out.println(new Div(binaryExpressions[0], binaryExpressions[2]).advancedSimplify());
+                    default -> {
+                    }
+                }
+            }
+        }}
 
     public static void expand(Scanner sc) {
         System.out.println("Enter the expression");
@@ -171,10 +173,10 @@ public class Main {
             }
 
             try {
-                    IExpr result = util.eval(userInput);
-                    System.out.println(result.toString());
-                } catch (SyntaxError ignored) {
-                }
+                IExpr result = util.eval(userInput);
+                System.out.println(result.toString());
+            } catch (SyntaxError ignored) {
+            }
 
 
 //            String[] inputs = userInput.split("\\(", 2);
@@ -197,11 +199,11 @@ public class Main {
 //                    }
 //                }
 
-            }
         }
-        static String removeLastChar(String s)
-        {
-            return s.substring(0, s.length() - 1);
-        }
-        }
+    }
+    static String removeLastChar(String s)
+    {
+        return s.substring(0, s.length() - 1);
+    }
+}
 

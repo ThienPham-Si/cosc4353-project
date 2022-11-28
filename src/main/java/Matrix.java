@@ -34,7 +34,7 @@ public class Matrix {
 
         if (nRows != nCols){
             System.out.println("Not same dimension");
-            return new Matrix();
+            return new Matrix(this.matrixData);
         }
 
         double[][] outData = new double[nRows][nCols];
@@ -56,6 +56,8 @@ public class Matrix {
 
         return new Matrix(outData);
     }
+
+
 
     public Matrix addMatrix(Matrix matrix2){
         int nRows = this.getRowDimension();
@@ -175,6 +177,86 @@ public class Matrix {
         }
         this.matrixData = newData;
     }
+
+    public double linearCombination(double[] data){
+        double sum = 0;
+        for (int i = 0; i < this.getRowDimension(); i++) {
+            sum += this.matrixData[i][0]*data[i];
+        }
+        return sum;
+    }
+
+    public int matrixRank(){
+        int rank = 0;
+        Matrix temp = this;
+        for (int i = 0; i < this.getRowDimension(); i++) {
+            if (temp.matrixData[i][i] == 0){
+                for (int j = i+1; j < this.getRowDimension(); j++) {
+                    if (temp.matrixData[j][i] != 0){
+                        temp.swapRow(i, j);
+                        rank++;
+                        break;
+                    }
+                }
+            }
+            if (temp.matrixData[i][i] != 0){
+                for (int j = i+1; j < this.getRowDimension(); j++) {
+                    double mult = temp.matrixData[j][i]/temp.matrixData[i][i];
+                    for (int k = 0; k < this.getColDimension(); k++) {
+                        temp.matrixData[j][k] -= mult*temp.matrixData[i][k];
+                    }
+                }
+            }
+        }
+        for (int i = 0; i < this.getRowDimension(); i++) {
+            if (temp.matrixData[i][i] != 0){
+                rank++;
+            }
+        }
+        return rank;
+    }
+
+    public void swapRow(int row1, int row2){
+        double[] temp = this.matrixData[row1];
+        this.matrixData[row1] = this.matrixData[row2];
+        this.matrixData[row2] = temp;
+    }
+
+    public double[][] eigenValues(){
+        double[][] eigenValues = new double[this.getRowDimension()][2];
+        for (int i = 0; i < this.getRowDimension(); i++) {
+            eigenValues[i][0] = this.matrixData[i][i];
+            eigenValues[i][1] = 1;
+        }
+        for (int i = 0; i < this.getRowDimension(); i++) {
+            for (int j = 0; j < this.getRowDimension(); j++) {
+                System.out.print(format.format(this.matrixData[i][j]) + " ");
+            }
+        }
+        return eigenValues;
+    }
+
+    public double[][] eigenVectors(){
+        double[][] eigenVectors = new double[this.getRowDimension()][this.getColDimension()];
+        for (int i = 0; i < this.getRowDimension(); i++) {
+            eigenVectors[i][i] = 1;
+        }
+        for (int i = 0; i < this.getRowDimension(); i++) {
+            for (int j = 0; j < this.getColDimension(); j++) {                    
+                System.out.print(format.format(eigenVectors[i][j]) + " ");
+            }
+        }
+        return eigenVectors;
+    }
+
+    public double[][] inverse(){
+        double[][] inverse = new double[this.getRowDimension()][this.getColDimension()];
+        for (int i = 0; i < this.getRowDimension(); i++) {
+            inverse[i][i] = 1/this.matrixData[i][i];
+        }
+        return inverse;
+    }
+
 
     public double[][] getMatrixData() {
         return matrixData;

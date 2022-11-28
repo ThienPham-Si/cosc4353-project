@@ -15,6 +15,41 @@ public class Symbol extends Expr{
         this.label = name;
     }
 
+    public Symbol(String name, String valueExpression) {
+        super(name);
+        this.label = name;
+        this.symbolValueExpression = valueExpression;
+    }
+
+    public Symbol(String name, double value) {
+        super(name);
+        this.label = name;
+        this.symbolValue = value;
+    }
+
+    public String getSymbolName() {
+        return symbolName;
+    }
+
+    public void setSymbolName(String symbolName) {
+        this.symbolName = symbolName;
+    }
+
+    public String getSymbolValueExpression() {
+        return symbolValueExpression;
+    }
+
+    public void setSymbolValueExpression(String symbolValueExpression) {
+        this.symbolValueExpression = symbolValueExpression;
+    }
+
+    public double getSymbolValue() {
+        return symbolValue;
+    }
+
+    public void setSymbolValue(double symbolValue) {
+        this.symbolValue = symbolValue;
+    }
 
 
     @Override
