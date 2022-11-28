@@ -1,3 +1,5 @@
+package experimental;
+
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
@@ -139,12 +141,6 @@ public class GammaFunction {
 
 
     private static BigDecimal pow_bd(BigDecimal v1, BigDecimal v2) {
-        // Java standard library does not have implementation of BigDecimal in non-integere power
-        //This implementation is taken from
-        //  https://stackoverflow.com/questions/3579779/how-to-do-a-fractional-power-on-bigdecimal-in-java?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
-        // however that link relies on java.math Math.pow() method for doubles, which reduces accuracy and was not sufficient for Spouge calculation with high accuracy
-        //Therefore, the method from above link was enhanced to allow to calculate the fractional power to any desired accuracy; see recursive method pow_less1()
-        //which is used for that purpose
 
         int signOf2 = v2.signum();
         v2 =v2.multiply(new BigDecimal(signOf2)); // n2 is now positive

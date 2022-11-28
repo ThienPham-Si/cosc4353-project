@@ -1,3 +1,5 @@
+package experimental;
+
 class Power{
     public static void main(String args []){
         double power = Math.pow(Double.parseDouble(args[0]),2.0);

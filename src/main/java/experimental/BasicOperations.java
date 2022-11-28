@@ -1,3 +1,5 @@
+package experimental;
+
 import java.util.Scanner;
 import java.util.Random;
 
